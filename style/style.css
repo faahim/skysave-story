@@ -6,3 +6,26 @@ body {
   margin: 0;
   font-family: "Work Sans", sans-serif;
 }
+
+.story-container {
+  visibility: hidden;
+  position: relative;
+}
+
+.story-container div {
+  position: absolute;
+}
+
+.one img {
+  width: 200px;
+  height: 200px;
+}
+
+.one p {
+  font-size: 2.5rem;
+}
+
+.one p span {
+  display: inline-block;
+  font-size: 2rem;
+}
