@@ -5,27 +5,56 @@ html {
 body {
   margin: 0;
   font-family: "Work Sans", sans-serif;
+  font-size: 26px;
+}
+
+img,
+span {
+  display: inline-block;
 }
 
 .story-container {
-  visibility: hidden;
+  width: 60%;
+  margin: 0 auto;
   position: relative;
+  visibility: hidden;
 }
 
-.story-container div {
+.story-container .avatar,
+.story-container .scenes {
+  display: inline-block;
+}
+
+.avatar {
+  width: 30%;
+  text-align: center;
+  float: left;
+}
+
+.avatar img {
+  transform: translateX(250px);
+}
+
+.scenes div {
   position: absolute;
+  width: 100%;
 }
 
-.one img {
+.avatar img {
   width: 200px;
   height: 200px;
 }
 
-.one p {
+.meet {
   font-size: 2.5rem;
 }
 
-.one p span {
+.destinations {
+  position: absolute;
+  top: 0;
+}
+
+.destinations span {
   display: inline-block;
-  font-size: 2rem;
+  font-weight: bold;
 }
