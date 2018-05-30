@@ -7,7 +7,9 @@
 // 3. Learn to draw line from a to b in SVG
 // 4. Make the animation timeline
 
+const animWait = "+=1.5";
 const story = new TimelineMax();
+story.set(".input-box", { transformPerspective: 800 });
 
 story
   .to(".story-container", 0.1, {
@@ -74,7 +76,7 @@ story
       x: 20
     },
     0.1,
-    "+=1.5"
+    animWait
   )
   .to(".destinations", 0.3, {
     opacity: 0,
@@ -102,18 +104,16 @@ story
   )
   .from(".save", 0.4, {
     opacity: 0,
-    scale: 0.1,
-    y: 20
+    y: -20
   })
   .to(
     ".save",
     0.3,
     {
       opacity: 0,
-      scale: 0.1,
       y: 20
     },
-    "+=1.5"
+    animWait
   )
   .from(".inputs", 0.5, {
     opacity: 0
@@ -124,5 +124,45 @@ story
     {
       opacity: 0
     },
-    "+=1.5"
+    animWait
+  )
+  .to(".avatar img", 0.3, {
+    scale: 0.1,
+    opacity: 0
+  })
+  .from(
+    ".input-box",
+    0.5,
+    {
+      opacity: 0,
+      scale: 0.7,
+      y: 30,
+      skewX: "15deg"
+    },
+    "popInput"
+  )
+  .to(
+    ".destination3before",
+    0.1,
+    {
+      visibility: "hidden"
+    },
+    "+=0.4"
+  )
+  .from(".destination3after", 0.2, {
+    opacity: 0
+  })
+  .to(
+    ".input-box",
+    1,
+    {
+      // rotationX: 10,
+      rotationY: 25,
+      // x: -200,
+      y: 50,
+      scale: 0.9
+    },
+    "+=0.3"
   );
+
+story.seek("popInput");
