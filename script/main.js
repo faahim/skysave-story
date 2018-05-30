@@ -13,15 +13,24 @@ story
   .to(".story-container", 0.1, {
     visibility: "visible"
   })
-  .from(".one img", 0.6, {
+  .from(".avatar img", 0.6, {
     opacity: 0,
     y: 50
   })
-  .from(".one p", 0.4, {
+  .to(
+    ".avatar img",
+    0.3,
+    {
+      x: 0,
+      width: 150
+    },
+    "+=0.5"
+  )
+  .from(".meet", 0.4, {
     opacity: 0,
     y: 30
   })
-  .from(".one p span", 0.3, {
+  .from(".meet span", 0.3, {
     opacity: 0,
     y: 20
   })
@@ -42,4 +51,106 @@ story
       y: 50
     },
     "-=0.1"
+  )
+  .from(".destinations", "0.4", {
+    opacity: 0,
+    y: 30,
+    skew: "25deg"
+  })
+  .staggerFrom(
+    ".destinations span",
+    0.5,
+    {
+      opacity: 0,
+      x: 20
+    },
+    0.2
+  )
+  .staggerTo(
+    ".destinations span",
+    0.3,
+    {
+      opacity: 0,
+      x: 20
+    },
+    0.1,
+    "+=1.5"
+  )
+  .to(".destinations", 0.3, {
+    opacity: 0,
+    y: 30,
+    skew: "25deg"
+  })
+  .staggerFrom(
+    ".two p",
+    0.4,
+    {
+      opacity: 0,
+      y: 30
+    },
+    0.2
+  )
+  .staggerTo(
+    ".two p",
+    0.3,
+    {
+      opacity: 0,
+      y: 30
+    },
+    -0.2,
+    "+=2.2"
+  )
+  // .from(".has-only", 0.5, {
+  //   opacity: 0,
+  //   y: 30,
+  //   rotation: "15deg"
+  // })
+  // .to(
+  //   ".has-only",
+  //   0.3,
+  //   {
+  //     opacity: 0,
+  //     y: 30,
+  //     rotation: "15deg"
+  //   },
+  //   "+=1.5"
+  // )
+  // .from(".worried", 0.5, {
+  //   opacity: 0,
+  //   y: 30
+  // })
+  // .to(
+  //   ".worried",
+  //   0.3,
+  //   {
+  //     opacity: 0,
+  //     y: 30
+  //   },
+  //   "+=1.5"
+  // )
+  .from(".save", 0.4, {
+    opacity: 0,
+    scale: 0.1,
+    y: 20
+  })
+  .to(
+    ".save",
+    0.3,
+    {
+      opacity: 0,
+      scale: 0.1,
+      y: 20
+    },
+    "+=1.5"
+  )
+  .from(".inputs", 0.5, {
+    opacity: 0
+  })
+  .to(
+    ".inputs",
+    0.3,
+    {
+      opacity: 0
+    },
+    "+=1.5"
   );
