@@ -45,6 +45,8 @@ span {
   height: 200px;
 }
 
+/* Scene One */
+
 .meet {
   font-size: 2.5rem;
 }
@@ -57,4 +59,24 @@ span {
 .destinations span {
   display: inline-block;
   font-weight: bold;
+}
+
+/* Scene Two */
+
+.save {
+  font-size: 2.2rem;
+}
+
+.inputs {
+  position: absolute;
+  top: 0;
+}
+
+/* Scene Three */
+
+.input-box {
+  position: absolute;
+  top: 0;
+  left: -80px;
+  box-shadow: 2px 8px 25px 5px rgba(191, 209, 210, 0.49);
 }
