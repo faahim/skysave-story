@@ -100,34 +100,6 @@ story
     -0.2,
     "+=2.2"
   )
-  // .from(".has-only", 0.5, {
-  //   opacity: 0,
-  //   y: 30,
-  //   rotation: "15deg"
-  // })
-  // .to(
-  //   ".has-only",
-  //   0.3,
-  //   {
-  //     opacity: 0,
-  //     y: 30,
-  //     rotation: "15deg"
-  //   },
-  //   "+=1.5"
-  // )
-  // .from(".worried", 0.5, {
-  //   opacity: 0,
-  //   y: 30
-  // })
-  // .to(
-  //   ".worried",
-  //   0.3,
-  //   {
-  //     opacity: 0,
-  //     y: 30
-  //   },
-  //   "+=1.5"
-  // )
   .from(".save", 0.4, {
     opacity: 0,
     scale: 0.1,
