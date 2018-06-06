@@ -142,15 +142,75 @@ story
     "popInput"
   )
   .to(
-    ".destination3before",
+    ".home-before",
     0.1,
     {
       visibility: "hidden"
     },
     "+=0.4"
   )
-  .from(".destination3after", 0.2, {
+  .from(".home-after", 0.2, {
     opacity: 0
+  })
+  .to(
+    ".date-before",
+    0.1,
+    {
+      visibility: "hidden"
+    },
+    "+=0.3"
+  )
+  .from(".date-after", 0.2, {
+    opacity: 0
+  })
+  .to(
+    ".destination1-before",
+    0.1,
+    {
+      visibility: "hidden"
+    },
+    "+=0.2"
+  )
+  .from(".destination1-after", 0.2, {
+    opacity: 0
+  })
+  .to(
+    ".stay1-before",
+    0.1,
+    {
+      visibility: "hidden"
+    },
+    "+=0.1"
+  )
+  .from(".stay1-after", 0.2, {
+    opacity: 0
+  })
+  .to(".destination2-before", 0.1, {
+    visibility: "hidden"
+  })
+  .from(".destination2-after", 0.2, {
+    opacity: 0
+  })
+  .to(".stay2-before", 0.1, {
+    visibility: "hidden"
+  })
+  .from(".stay2-after", 0.2, {
+    opacity: 0
+  })
+  .to(".destination3-before", 0.1, {
+    visibility: "hidden"
+  })
+  .from(".destination3-after", 0.2, {
+    opacity: 0
+  })
+  .to(".stay3-before", 0.1, {
+    visibility: "hidden"
+  })
+  .from(".stay3-after", 0.2, {
+    opacity: 0
+  })
+  .to(".submit-btn-rect", 0.2, {
+    fill: "#7ea1bb"
   })
   .to(
     ".input-box",
@@ -165,4 +225,4 @@ story
     "+=0.3"
   );
 
-story.seek("popInput");
+// story.seek("popInput");
