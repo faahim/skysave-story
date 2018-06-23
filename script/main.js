@@ -54,6 +54,19 @@ story
     },
     "-=0.1"
   )
+  .from(".holidays", 0.4, {
+    opacity: 0,
+    y: 30
+  })
+  .to(
+    ".holidays",
+    0.3,
+    {
+      opacity: 0,
+      y: 50
+    },
+    "+=2"
+  )
   .from(".destinations", "0.4", {
     opacity: 0,
     y: 30,
@@ -68,6 +81,19 @@ story
     },
     0.2
   )
+  .from(".duration", 0.3, {
+    opacity: 0,
+    y: 30
+  })
+  .to(
+    ".duration",
+    0.2,
+    {
+      opacity: 0,
+      y: 30
+    },
+    animWait
+  )
   .staggerTo(
     ".destinations span",
     0.3,
@@ -76,7 +102,7 @@ story
       x: 20
     },
     0.1,
-    animWait
+    "+=0.2"
   )
   .to(".destinations", 0.3, {
     opacity: 0,
@@ -102,18 +128,14 @@ story
     -0.2,
     "+=2.2"
   )
-  .from(".save", 0.4, {
-    opacity: 0,
-    y: -20
-  })
-  .to(
+  .from(
     ".save",
-    0.3,
+    0.4,
     {
       opacity: 0,
-      y: 20
+      y: -20
     },
-    animWait
+    "popInput"
   )
   .from(".inputs", 0.5, {
     opacity: 0
@@ -130,17 +152,12 @@ story
     scale: 0.1,
     opacity: 0
   })
-  .from(
-    ".input-box",
-    0.5,
-    {
-      opacity: 0,
-      scale: 0.7,
-      y: 30,
-      skewX: "15deg"
-    },
-    "popInput"
-  )
+  .from(".input-box", 0.5, {
+    opacity: 0,
+    scale: 0.7,
+    y: 30,
+    skewX: "15deg"
+  })
   .to(
     ".home-before",
     0.1,
@@ -223,6 +240,15 @@ story
       scale: 0.9
     },
     "+=0.3"
+  )
+  .to(
+    ".save",
+    0.3,
+    {
+      opacity: 0,
+      y: 20
+    },
+    animWait
   );
 
-// story.seek("popInput");
+story.seek("popInput");
