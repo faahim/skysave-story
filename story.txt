@@ -1,0 +1,14 @@
+"Luke is from New York. He's on holidays and would like to travel around Europe."
+
+"Luke has decided on Florence, Athens, Paris, Berlin, Vienna each for 3 days.
+
+He checked for prices online. Yikes! The cheapest flights he could find were $1,220."
+
+"He's friend Catherine told him about Skysave.co. 
+Using skysave and entering he's destinations and time of stay"  (Animation of Form at same time)
+
+"Leveraging Skysave's route saving algorithm. " (Website going through different routes to find optimal one)
+
+Skysave found a path that involved going to Berlin first and Athens last. That only costed $880 a 30% saving!" (result page of route)
+
+"Now Luke is happily travelling and spending he's extra money eating nice Berlin chocolates."
