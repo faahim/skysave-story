@@ -138,26 +138,41 @@ story
     "popInput"
   )
   .from(".inputs", 0.5, {
-    opacity: 0
+    opacity: 0,
+    y: 30
   })
-  .to(
-    ".inputs",
-    0.3,
-    {
-      opacity: 0
-    },
-    animWait
-  )
   .to(".avatar img", 0.3, {
     scale: 0.1,
     opacity: 0
   })
-  .from(".input-box", 0.5, {
-    opacity: 0,
-    scale: 0.7,
-    y: 30,
-    skewX: "15deg"
-  })
+  .from(
+    ".input-box",
+    0.5,
+    {
+      opacity: 0,
+      scale: 0.7,
+      y: 30,
+      skewX: "15deg"
+    },
+    "boxAppear"
+  )
+  .to(
+    ".input-box",
+    0.5,
+    {
+      x: -250
+    },
+    "boxAppear"
+  )
+  .to(
+    ".inputs",
+    0.5,
+    {
+      x: 250,
+      y: 120
+    },
+    "boxAppear"
+  )
   .to(
     ".home-before",
     0.1,
@@ -229,17 +244,40 @@ story
   .to(".submit-btn-rect", 0.2, {
     fill: "#7ea1bb"
   })
+  .to(".svg-plane", 0.5, {
+    x: 800,
+    y: 350,
+    fill: "#60bcff"
+  })
+  .to(".svg-plane", 0.5, {
+    rotation: -60
+  })
+  .to(".svg-plane", 0.5, {
+    x: 40,
+    y: -100,
+    scale: 5.5
+  })
   .to(
     ".input-box",
     1,
     {
       // rotationX: 10,
-      rotationY: 25,
+      rotationY: 100,
       // x: -200,
       y: 50,
-      scale: 0.9
+      scale: 0.9,
+      opacity: 0
     },
     "+=0.3"
+  )
+  .to(
+    ".inputs",
+    0.3,
+    {
+      opacity: 0,
+      y: 30
+    },
+    "-=0.6"
   )
   .to(
     ".save",
