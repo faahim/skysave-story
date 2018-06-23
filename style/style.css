@@ -47,6 +47,10 @@ span {
 
 /* Scene One */
 
+.duration {
+  transform: translateY(50px);
+}
+
 .meet {
   font-size: 2.5rem;
 }
