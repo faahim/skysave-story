@@ -6,10 +6,55 @@
 // 2. Find a lightweight world map SVG
 // 3. Learn to draw line from a to b in SVG
 // 4. Make the animation timeline
+const pathBegin = document.getElementById("US").getBBox();
+
+const dest1 = document.getElementById("IT").getBBox();
+
+const dest2 = document.getElementById("GR").getBBox();
+
+const dest3 = document.getElementById("FR").getBBox();
+
+const dest4 = document.getElementById("DE").getBBox();
+
+const dest5 = document.getElementById("AT").getBBox();
+
+const lineData = [
+  [pathBegin.x + pathBegin.width / 2, pathBegin.y + pathBegin.height / 2],
+  [dest1.x + dest1.width / 2, dest1.y + dest1.height / 2],
+  [dest5.x + dest5.width / 2, dest5.y + dest5.height / 2],
+  [dest3.x + dest3.width / 2, dest3.y + dest3.height / 2],
+  [dest2.x + dest2.width / 2, dest2.y + dest2.height / 2],
+  [dest4.x + dest4.width / 2, dest4.y + dest4.height / 2]
+];
+
+const lineGen = d3.line();
+const pathConstract = lineGen(lineData);
+
+const mapEle = d3.select("#world-map");
+
+mapEle
+  .append("path")
+  .attr("d", pathConstract)
+  .attr("stroke", "blue")
+  .attr("stroke-width", 2)
+  .attr("fill", "none");
+
+lineData.map(coor => {
+  mapEle
+    .append("circle")
+    .attr("cx", coor[0])
+    .attr("cy", coor[1])
+    .attr("r", "5px")
+    .attr("fill", "purple");
+});
+
+console.log(pathBegin, " ", dest1, JSON.stringify(lineData));
+console.log(d3);
 
 const animWait = "+=1.5";
 const story = new TimelineMax();
 story.set(".input-box", { transformPerspective: 800 });
+story.set("#world-map", { transformPerspective: 800 });
 
 story
   .to(".story-container", 0.1, {
@@ -128,15 +173,10 @@ story
     -0.2,
     "+=2.2"
   )
-  .from(
-    ".save",
-    0.4,
-    {
-      opacity: 0,
-      y: -20
-    },
-    "popInput"
-  )
+  .from(".save", 0.4, {
+    opacity: 0,
+    y: -20
+  })
   .from(".inputs", 0.5, {
     opacity: 0,
     y: 30
@@ -252,14 +292,19 @@ story
   .to(".svg-plane", 0.5, {
     rotation: -60
   })
-  .to(".svg-plane", 0.5, {
-    x: 40,
-    y: -100,
-    scale: 5.5
-  })
+  .to(
+    ".svg-plane",
+    0.5,
+    {
+      x: 40,
+      y: -100,
+      scale: 5.5
+    },
+    "popInput"
+  )
   .to(
     ".input-box",
-    1,
+    0.5,
     {
       // rotationX: 10,
       rotationY: 100,
@@ -267,6 +312,27 @@ story
       y: 50,
       scale: 0.9,
       opacity: 0
+    },
+    "+=0.3"
+  )
+  .from(
+    "#world-map",
+    0.5,
+    {
+      opacity: 0,
+      scale: 0.9,
+      rotationY: -100
+    },
+    "-=0.2"
+  )
+  .to(".map-container", 0.1, {
+    overflow: "hidden"
+  })
+  .to(
+    "#world-map",
+    0.3,
+    {
+      scale: 5
     },
     "+=0.3"
   )
@@ -279,6 +345,10 @@ story
     },
     "-=0.6"
   )
+  .from(".algo", 0.3, {
+    opacity: 0,
+    y: 130
+  })
   .to(
     ".save",
     0.3,
