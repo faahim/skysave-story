@@ -90,3 +90,27 @@ span {
   left: -80px;
   box-shadow: 2px 8px 25px 5px rgba(191, 209, 210, 0.49);
 }
+
+/* Scene Four */
+
+.four {
+  position: absolute;
+  left: 0;
+}
+
+.map-container {
+  transform: translateX(-100px) translateY(50px);
+  max-width: 500px;
+  /* overflow: hidden; */
+}
+
+#world-map {
+  max-width: 500px;
+  fill: #eeeeee;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.3));
+}
+
+.algo {
+  float: right;
+  transform: translateX(200px) translateY(150px);
+}
