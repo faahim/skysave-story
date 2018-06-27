@@ -89,7 +89,7 @@ lineData.map((line, i) => {
 
 console.log(document.getElementsByClassName("path-dash")[0].getTotalLength());
 
-lineData[0].map(coor => {
+lineData[0].map((coor, i) => {
   mapEle
     .append("circle")
     .attr("cx", coor[0])
@@ -97,6 +97,23 @@ lineData[0].map(coor => {
     .attr("r", "5px")
     .attr("fill", "purple")
     .attr("class", "map-plots");
+
+  if (i === 2) {
+    mapEle
+      .append("svg:image")
+      .attr("xlink:href", "img/best-route-plot.svg")
+      .attr("width", 80)
+      .attr("height", 80)
+      .attr("transform", `translate(${coor[0] - 38} ${coor[1] - 72})`)
+      .attr("class", "best-route-plot");
+    // .attr("dx", d => coor[0] - 2)
+    // .attr("dy", d => coor[1] - 2)
+    // .attr("fill", "purple")
+    // .text(d => {
+    //   console.log(i);
+    //   return i;
+    // });
+  }
 });
 
 console.log(pathBegin, " ", dest1, JSON.stringify(lineData));
@@ -345,24 +362,37 @@ story
   .to(".submit-btn-rect", 0.2, {
     fill: "#7ea1bb"
   })
-  .to(".svg-plane", 0.5, {
-    x: 800,
-    y: 350,
-    fill: "#60bcff"
-  })
-  .to(".svg-plane", 0.5, {
-    rotation: -60
-  })
   .to(
     ".svg-plane",
     0.5,
     {
-      x: 40,
-      y: -100,
-      scale: 5.5
+      x: 800,
+      y: 350,
+      fill: "#60bcff"
     },
     "popInput"
   )
+  .to(".svg-plane", 0.5, {
+    rotation: -60
+  })
+  .to(".svg-plane", 0.5, {
+    x: 40,
+    y: -100,
+    scale: 5.5
+  })
+  .to(
+    ".inputs",
+    0.3,
+    {
+      opacity: 0,
+      y: 30
+    },
+    "-=0.6"
+  )
+  .from(".algo", 0.3, {
+    opacity: 0,
+    y: 130
+  })
   .to(
     ".input-box",
     0.5,
@@ -427,18 +457,10 @@ story
   .to(".path-to-fade", 0.3, {
     opacity: 0
   })
-  .to(
-    ".inputs",
-    0.3,
-    {
-      opacity: 0,
-      y: 30
-    },
-    "-=0.6"
-  )
-  .from(".algo", 0.3, {
+  .from(".best-route-plot", 0.3, {
     opacity: 0,
-    y: 130
+    y: 260,
+    scale: 0.9
   })
   .to(
     ".save",
@@ -450,4 +472,4 @@ story
     animWait
   );
 
-// story.seek("popInput");
+story.seek("popInput");
