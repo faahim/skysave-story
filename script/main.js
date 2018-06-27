@@ -405,18 +405,24 @@ story
           document.getElementsByClassName("path-dash")[i].getTotalLength()
       }
     },
-    0.3
+    0.3,
+    "drawPath"
   )
-  .to(".map-container", 0.1, {
-    overflow: "hidden"
-  })
+  .to(
+    ".map-container",
+    0.1,
+    {
+      overflow: "hidden"
+    },
+    "-=3"
+  )
   .to(
     "#world-map",
-    0.3,
+    3,
     {
       scale: 5
     },
-    "+=0.3"
+    "drawPath+=0.5"
   )
   .to(".path-to-fade", 0.3, {
     opacity: 0
