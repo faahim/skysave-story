@@ -12,6 +12,7 @@
 // 4. Find Catherine's avater
 // 5. Make multiple path line
 
+// Get countries location coordinates on the map
 const pathBegin = document.getElementById("US").getBBox();
 
 const dest1 = document.getElementById("IT").getBBox();
@@ -24,34 +25,71 @@ const dest4 = document.getElementById("DE").getBBox();
 
 const dest5 = document.getElementById("AT").getBBox();
 
+// Constructs position dataset of contries for plotting dots
 const lineData = [
-  [pathBegin.x + pathBegin.width / 2, pathBegin.y + pathBegin.height / 2],
-  [dest1.x + dest1.width / 2, dest1.y + dest1.height / 2],
-  [dest5.x + dest5.width / 2, dest5.y + dest5.height / 2],
-  [dest3.x + dest3.width / 2, dest3.y + dest3.height / 2],
-  [dest2.x + dest2.width / 2, dest2.y + dest2.height / 2],
-  [dest4.x + dest4.width / 2, dest4.y + dest4.height / 2]
+  [
+    [pathBegin.x + pathBegin.width / 2, pathBegin.y + pathBegin.height / 2],
+    [dest1.x + dest1.width / 2, dest1.y + dest1.height / 2],
+    [dest2.x + dest2.width / 2, dest2.y + dest2.height / 2],
+    [dest3.x + dest3.width / 2, dest3.y + dest3.height / 2],
+    [dest4.x + dest4.width / 2, dest4.y + dest4.height / 2],
+    [dest5.x + dest5.width / 2, dest5.y + dest5.height / 2]
+  ],
+  [
+    [pathBegin.x + pathBegin.width / 2, pathBegin.y + pathBegin.height / 2],
+    [dest4.x + dest4.width / 2, dest4.y + dest4.height / 2],
+    [dest1.x + dest1.width / 2, dest1.y + dest1.height / 2],
+    [dest5.x + dest5.width / 2, dest5.y + dest5.height / 2],
+    [dest3.x + dest3.width / 2, dest3.y + dest3.height / 2],
+    [dest2.x + dest2.width / 2, dest2.y + dest2.height / 2]
+  ],
+  [
+    [pathBegin.x + pathBegin.width / 2, pathBegin.y + pathBegin.height / 2],
+    [dest3.x + dest3.width / 2, dest3.y + dest3.height / 2],
+    [dest1.x + dest1.width / 2, dest1.y + dest1.height / 2],
+    [dest2.x + dest2.width / 2, dest2.y + dest2.height / 2],
+    [dest5.x + dest5.width / 2, dest5.y + dest5.height / 2],
+    [dest4.x + dest4.width / 2, dest4.y + dest4.height / 2]
+  ],
+  [
+    [pathBegin.x + pathBegin.width / 2, pathBegin.y + pathBegin.height / 2],
+    [dest5.x + dest5.width / 2, dest5.y + dest5.height / 2],
+    [dest4.x + dest4.width / 2, dest4.y + dest4.height / 2],
+    [dest1.x + dest1.width / 2, dest1.y + dest1.height / 2],
+    [dest2.x + dest2.width / 2, dest2.y + dest2.height / 2],
+    [dest3.x + dest3.width / 2, dest3.y + dest3.height / 2]
+  ],
+  [
+    [pathBegin.x + pathBegin.width / 2, pathBegin.y + pathBegin.height / 2],
+    [dest2.x + dest2.width / 2, dest2.y + dest2.height / 2],
+    [dest3.x + dest3.width / 2, dest3.y + dest3.height / 2],
+    [dest5.x + dest5.width / 2, dest5.y + dest5.height / 2],
+    [dest1.x + dest1.width / 2, dest1.y + dest1.height / 2],
+    [dest4.x + dest4.width / 2, dest4.y + dest4.height / 2]
+  ]
 ];
 
 const lineGen = d3
   .line()
   .x(d => d[0])
   .y(d => d[1]);
-// const pathConstract = lineGen(lineData);
 
 const mapEle = d3.select("#world-map");
 
-mapEle
-  .append("path")
-  .attr("d", lineGen(lineData))
-  .attr("stroke", "blue")
-  .attr("stroke-width", 2)
-  .attr("fill", "none")
-  .attr("class", "path-dash");
+lineData.map((line, i) => {
+  let className = i === 1 ? "path-dash" : "path-dash path-to-fade";
+  mapEle
+    .append("path")
+    .attr("d", lineGen(lineData[i]))
+    .attr("stroke", "blue")
+    .attr("stroke-width", 2)
+    .attr("fill", "none")
+    .attr("class", className);
+});
 
 console.log(document.getElementsByClassName("path-dash")[0].getTotalLength());
 
-lineData.map(coor => {
+lineData[0].map(coor => {
   mapEle
     .append("circle")
     .attr("cx", coor[0])
@@ -64,14 +102,18 @@ lineData.map(coor => {
 console.log(pathBegin, " ", dest1, JSON.stringify(lineData));
 console.log(d3);
 
-const animWait = "+=1.5";
 const story = new TimelineMax();
+const animWait = "+=1.5";
 story.set(".input-box", { transformPerspective: 800 });
 story.set("#world-map", { transformPerspective: 800 });
 story.set(".path-dash", {
-  strokeDasharray: document
-    .getElementsByClassName("path-dash")[0]
-    .getTotalLength(),
+  strokeDasharray: i => {
+    const length = document
+      .getElementsByClassName("path-dash")
+      [i].getTotalLength();
+    console.log(i, " blaah ", length);
+    return length;
+  },
   strokeDashoffset: 0
 });
 
@@ -354,11 +396,17 @@ story
     },
     0.1
   )
-  .from(".path-dash", 1.5, {
-    strokeDashoffset: document
-      .getElementsByClassName("path-dash")[0]
-      .getTotalLength()
-  })
+  .staggerFrom(
+    ".path-dash",
+    1.5,
+    {
+      cycle: {
+        strokeDashoffset: i =>
+          document.getElementsByClassName("path-dash")[i].getTotalLength()
+      }
+    },
+    0.3
+  )
   .to(".map-container", 0.1, {
     overflow: "hidden"
   })
@@ -370,6 +418,9 @@ story
     },
     "+=0.3"
   )
+  .to(".path-to-fade", 0.3, {
+    opacity: 0
+  })
   .to(
     ".inputs",
     0.3,
