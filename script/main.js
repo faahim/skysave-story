@@ -4,8 +4,14 @@
 // Done
 
 // 2. Find a lightweight world map SVG
+// Done
+
 // 3. Learn to draw line from a to b in SVG
-// 4. Make the animation timeline
+//Done
+
+// 4. Find Catherine's avater
+// 5. Make multiple path line
+
 const pathBegin = document.getElementById("US").getBBox();
 
 const dest1 = document.getElementById("IT").getBBox();
@@ -27,17 +33,23 @@ const lineData = [
   [dest4.x + dest4.width / 2, dest4.y + dest4.height / 2]
 ];
 
-const lineGen = d3.line();
-const pathConstract = lineGen(lineData);
+const lineGen = d3
+  .line()
+  .x(d => d[0])
+  .y(d => d[1]);
+// const pathConstract = lineGen(lineData);
 
 const mapEle = d3.select("#world-map");
 
 mapEle
   .append("path")
-  .attr("d", pathConstract)
+  .attr("d", lineGen(lineData))
   .attr("stroke", "blue")
   .attr("stroke-width", 2)
-  .attr("fill", "none");
+  .attr("fill", "none")
+  .attr("class", "path-dash");
+
+console.log(document.getElementsByClassName("path-dash")[0].getTotalLength());
 
 lineData.map(coor => {
   mapEle
@@ -45,7 +57,8 @@ lineData.map(coor => {
     .attr("cx", coor[0])
     .attr("cy", coor[1])
     .attr("r", "5px")
-    .attr("fill", "purple");
+    .attr("fill", "purple")
+    .attr("class", "map-plots");
 });
 
 console.log(pathBegin, " ", dest1, JSON.stringify(lineData));
@@ -55,6 +68,12 @@ const animWait = "+=1.5";
 const story = new TimelineMax();
 story.set(".input-box", { transformPerspective: 800 });
 story.set("#world-map", { transformPerspective: 800 });
+story.set(".path-dash", {
+  strokeDasharray: document
+    .getElementsByClassName("path-dash")[0]
+    .getTotalLength(),
+  strokeDashoffset: 0
+});
 
 story
   .to(".story-container", 0.1, {
@@ -325,6 +344,21 @@ story
     },
     "-=0.2"
   )
+  .staggerFrom(
+    ".map-plots",
+    0.5,
+    {
+      opacity: 0,
+      scale: 0.3,
+      ease: Back.easeOut.config(1.7)
+    },
+    0.1
+  )
+  .from(".path-dash", 1.5, {
+    strokeDashoffset: document
+      .getElementsByClassName("path-dash")[0]
+      .getTotalLength()
+  })
   .to(".map-container", 0.1, {
     overflow: "hidden"
   })
