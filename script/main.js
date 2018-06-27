@@ -450,4 +450,4 @@ story
     animWait
   );
 
-story.seek("popInput");
+// story.seek("popInput");
