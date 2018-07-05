@@ -119,7 +119,9 @@ lineData[0].map((coor, i) => {
 console.log(pathBegin, " ", dest1, JSON.stringify(lineData));
 console.log(d3);
 
-const story = new TimelineMax();
+const story = new TimelineMax({
+  repeat: -1
+});
 const animWait = "+=1.5";
 story.set(".input-box", { transformPerspective: 800 });
 story.set("#world-map", { transformPerspective: 800 });
@@ -133,17 +135,19 @@ story.set(".path-dash", {
   },
   strokeDashoffset: 0
 });
+story.set(".map-plots:last-child", { transformOrigin: "center center" });
+story.set(".avatar-lips", { transformOrigin: "center center" });
 
 story
   .to(".story-container", 0.1, {
     visibility: "visible"
   })
-  .from(".avatar img", 0.6, {
+  .from(".avatar-svg", 0.6, {
     opacity: 0,
     y: 50
   })
   .to(
-    ".avatar img",
+    ".avatar-svg",
     0.3,
     {
       x: 0,
@@ -241,6 +245,15 @@ story
     },
     0.2
   )
+  .to(".avatar-lips", 0.3, {
+    opacity: 0
+  })
+  .to(".avatar-lips", 0.1, {
+    rotation: 180
+  })
+  .to(".avatar-lips", 0.3, {
+    opacity: 1
+  })
   .staggerTo(
     ".two p",
     0.3,
@@ -255,11 +268,11 @@ story
     opacity: 0,
     y: -20
   })
-  .from(".inputs", 0.5, {
+  .from(".about-inputs", 0.5, {
     opacity: 0,
     y: 30
   })
-  .to(".avatar img", 0.3, {
+  .to(".avatar-svg", 0.3, {
     scale: 0.1,
     opacity: 0
   })
@@ -362,16 +375,11 @@ story
   .to(".submit-btn-rect", 0.2, {
     fill: "#7ea1bb"
   })
-  .to(
-    ".svg-plane",
-    0.5,
-    {
-      x: 800,
-      y: 350,
-      fill: "#60bcff"
-    },
-    "popInput"
-  )
+  .to(".svg-plane", 0.5, {
+    x: 800,
+    y: 350,
+    fill: "#60bcff"
+  })
   .to(".svg-plane", 0.5, {
     rotation: -60
   })
@@ -381,7 +389,7 @@ story
     scale: 5.5
   })
   .to(
-    ".inputs",
+    ".about-inputs",
     0.3,
     {
       opacity: 0,
@@ -457,19 +465,91 @@ story
   .to(".path-to-fade", 0.3, {
     opacity: 0
   })
+  .to(".algo", 0.3, {
+    opacity: 0,
+    y: 130
+  })
+  .from(".path-found", 0.3, {
+    opacity: 0,
+    y: 30
+  })
   .from(".best-route-plot", 0.3, {
     opacity: 0,
     y: 260,
     scale: 0.9
   })
-  .to(
-    ".save",
+  .to(".path-found", 0.2, {
+    y: -40
+  })
+  .fromTo(
+    ".savings-made",
     0.3,
     {
       opacity: 0,
-      y: 20
+      y: 85
     },
-    animWait
+    {
+      opacity: 1,
+      y: 60
+    }
+  )
+  .to(
+    ".savings-number",
+    0.5,
+    {
+      scale: 1.8,
+      rotation: 15,
+      ease: Back.easeOut.config(1.7)
+    },
+    "+=0.5"
+  )
+  .to(".savings-number", 0.2, {
+    rotation: 0,
+    scale: 1
+  })
+  .to(".path-found", 0.2, {
+    opacity: 0,
+    y: -60
+  })
+  .to(".savings-made", 0.2, {
+    opacity: 0,
+    y: -20
+  })
+  .to(".map-plots:last-child", 0.6, {
+    scale: 30
+  })
+  .to(
+    ".map-container",
+    0.3,
+    {
+      opacity: 0
+    },
+    "popInput"
+  )
+  .to(".avatar-svg", 0.3, {
+    scale: 1,
+    opacity: 1
+  })
+  .from(".happy-luke", 0.3, {
+    opacity: 0,
+    y: 30
+  })
+  .to(".avatar-lips", 0.3, {
+    opacity: 0
+  })
+  .to(".avatar-lips", 0.1, {
+    rotation: 0
+  })
+  .to(".avatar-lips", 0.3, {
+    opacity: 1
+  })
+  .to(
+    ".story-container",
+    0.5,
+    {
+      opacity: 0
+    },
+    "+=2"
   );
 
-story.seek("popInput");
+// story.seek("popInput");
