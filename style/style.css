@@ -33,18 +33,15 @@ span {
   float: left;
 }
 
-.avatar img {
+.avatar-svg {
   transform: translateX(250px);
+  width: 200px;
+  height: 200px;
 }
 
 .scenes div {
   position: absolute;
   width: 100%;
-}
-
-.avatar img {
-  width: 200px;
-  height: 200px;
 }
 
 .short-text {
@@ -77,8 +74,9 @@ span {
   font-size: 2.2rem;
 }
 
-.inputs {
+.about-inputs {
   position: absolute;
+  transform: translate(245px, 125px);
   top: 0;
 }
 
@@ -104,13 +102,30 @@ span {
   /* overflow: hidden; */
 }
 
+.map-side-texts {
+  background-color: #ccc;
+  max-width: 75%;
+  transform: translate(245px, 125px);
+  position: absolute;
+  right: 0;
+}
+
+.map-side-texts p {
+  position: absolute;
+}
+
+.map-side-texts .savings-made {
+  transform: translateY(30px);
+}
+
 #world-map {
   max-width: 500px;
   fill: #eeeeee;
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.3));
 }
 
-.algo {
-  float: right;
-  transform: translateX(200px) translateY(150px);
+.best-cost-found,
+.savings-number {
+  color: #60bcff;
+  font-weight: bold;
 }
